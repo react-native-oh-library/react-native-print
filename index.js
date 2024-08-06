@@ -1,3 +1,3 @@
-import { NativeModules } from 'react-native';
-
-export default NativeModules.RNPrint;
+import { NativeModules,TurboModuleRegistry } from 'react-native';
+var RNPrint = TurboModuleRegistry ? TurboModuleRegistry.get('RNPrint') : NativeModules.RNPrint;
+export default RNPrint;
