@@ -1,7 +1,7 @@
 import { TurboModule } from '@rnoh/react-native-openharmony/ts';
 import { TM } from '@rnoh/react-native-openharmony/generated/ts';
-import print from '@ohos.print';
-import uri from '@ohos.uri';
+import { print } from '@kit.BasicServicesKit';
+import uri from '@ohos.uri'
 import fs from '@ohos.file.fs';
 import common from '@ohos.app.ability.common';
 import { http } from '@kit.NetworkKit';
@@ -15,13 +15,13 @@ interface OptionsTypes {
   baseUrl?: string,
 }
 
-const DEFAULT_JOBNAME = "Document";
-const DEFAULT_ISLANDSCAPE = false;
+const DEFAULT_JOB_NAME = "Document";
+const DEFAULT_IS_LANDSCAPE = false;
 
 export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
   private context: common.UIAbilityContext;
-  // 缓冲区的内存空间为5MB
-  private buffer = new ArrayBuffer(5242880);
+  //缓冲区的内存空间为5MB
+  private buffer = new ArrayBuffer(10485760);
 
   constructor(ctx) {
     super(ctx);
@@ -35,7 +35,7 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
   //从沙箱中读取数据
   init(files: Array<string>): Array<string> {
     let fdArray: Array<string> = new Array();
-    let tempPath: string = '/data/storage/el2/base/haps/entry/files/' + files[0];
+    let tempPath: string = this.context.filesDir + files[0];
     let tempFile: fs.File = fs.openSync(tempPath);
     fdArray.push(`fd://${tempFile.fd}`);
     return fdArray;
@@ -48,7 +48,7 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
   //读取到沙箱
   read(buffer, jobName) {
     const file: fs.File =
-      fs.openSync('/data/storage/el2/base/haps/entry/files/' + jobName, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+      fs.openSync(this.context.filesDir + jobName, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
     fs.writeSync(file.fd, buffer);
     fs.closeSync(file);
   }
@@ -56,17 +56,17 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
   //开始打印
   private async startPrint(data, jobName) {
     await this.read(data, jobName);
-    await print.print(this.init([jobName]), this.context);
+    await print.print(this.init([jobName]), this.context)
   }
 
   print(options: OptionsTypes) {
     let filePath: [string] = [this.getOptionValue(options, 'filePath', null)];
-    let jobName: string = this.getOptionValue(options, 'jobName', DEFAULT_JOBNAME);
-    let isLandscape: boolean = this.getOptionValue(options, 'isLandscape', DEFAULT_ISLANDSCAPE);
+    let jobName: string = this.getOptionValue(options, 'jobName', DEFAULT_JOB_NAME);
+    let isLandscape: boolean = this.getOptionValue(options, 'isLandscape', DEFAULT_IS_LANDSCAPE);
     let html: string = this.getOptionValue(options, 'html', null);
     let printerURL: string = this.getOptionValue(options, 'printerURL', null);
     let baseUrl: string = this.getOptionValue(options, 'baseUrl', null);
-    const uriInstance = new uri.URI(filePath[0]);
+    let uriInstance = new uri.URI(filePath[0]);
 
     if ((html == null && filePath == null) || (html != null && filePath != null)) {
       Promise.reject(this.getName() +
@@ -88,3 +88,5 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
     }
   }
 }
+
+
