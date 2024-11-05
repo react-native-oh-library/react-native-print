@@ -47,8 +47,7 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
 
   //读取到沙箱
   read(buffer, jobName) {
-    const file: fs.File =
-      fs.openSync(this.context.filesDir + jobName, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+    const file: fs.File = fs.openSync(this.context.filesDir + jobName, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
     fs.writeSync(file.fd, buffer);
     fs.closeSync(file);
   }
@@ -62,11 +61,11 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
   print(options: OptionsTypes) {
     let filePath: [string] = [this.getOptionValue(options, 'filePath', null)];
     let jobName: string = this.getOptionValue(options, 'jobName', DEFAULT_JOB_NAME);
-    let isLandscape: boolean = this.getOptionValue(options, 'isLandscape', DEFAULT_IS_LANDSCAPE);
     let html: string = this.getOptionValue(options, 'html', null);
-    let printerURL: string = this.getOptionValue(options, 'printerURL', null);
-    let baseUrl: string = this.getOptionValue(options, 'baseUrl', null);
     let uriInstance = new uri.URI(filePath[0]);
+    let isLandscape: boolean = this.getOptionValue(options, 'isLandscape', DEFAULT_IS_LANDSCAPE);
+    let baseUrl: string = this.getOptionValue(options, 'baseUrl', null);
+    let printerURL: string = this.getOptionValue(options, 'printerURL', null);
 
     if ((html == null && filePath == null) || (html != null && filePath != null)) {
       Promise.reject(this.getName() +
@@ -77,13 +76,13 @@ export class RNPrintTurboModule extends TurboModule implements TM.RNPrint.Spec {
       if (uriInstance.checkIsAbsolute()) {
         let httpRequest = http.createHttp();
         httpRequest.request(filePath[0], (err: Error, data: http.HttpResponse) => {
-          this.startPrint(data.result,jobName);
+          this.startPrint(data.result, jobName);
         });
       } else {
         let file = fs.openSync(filePath[0], fs.OpenMode.READ_ONLY);
         fs.readSync(file.fd, this.buffer);
         fs.closeSync(file);
-        this.startPrint(this.buffer,jobName);
+        this.startPrint(this.buffer, jobName);
       }
     }
   }

@@ -1,36 +1,35 @@
 {
-  "name": "@react-native-oh-tpl/react-native-print",
-  "version": "0.11.0-0.0.2",
-  "description": "Print documents with React Native",
-  "main": "index.js",
-  "types": "types/index.d.ts",
-  "keywords": [
-    "react-native",
-    "print",
-    "ndef",
-    "react",
-    "native",
-    "harmony"
-  ],
-  "harmony": {
-    "alias":"react-native-print",
-   "codegenConfig": {
-      "specPaths": [
-        "./src"
-      ]
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "github://github.com/react-native-oh-library/react-native-print"
-  },
-  "peerDependencies": {
-    "react-native": ">=0.8.0 || 0.8.0-rc || 0.8.0-rc.2 || 0.9.0-rc || 0.10.1",
-    "react-native-windows": ">=0.62" 
-  },
-  "dependencies":{
-    "react-native-print":"0.11.0"
-  },
-  "author": "Christopher Dro <casheghian@gmail.com> (http://chris.si)",
-  "license": "MIT"
+	"name": "@react-native-oh-tpl/react-native-print",
+	"version": "0.11.0-0.0.3",
+	"description": "Print documents with React Native",
+	"main": "index.js",
+	"types": "types/index.d.ts",
+	"keywords": [
+		"react-native",
+		"print",
+		"ndef",
+		"react",
+		"native",
+		"harmony"
+	],
+	"harmony": {
+		"alias": "react-native-print",
+		"codegenConfig": {
+			"specPaths": [
+				"./src"
+			]
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "github://github.com/react-native-oh-library/react-native-print"
+	},
+	"peerDependencies": {
+		"react-native": ">=0.8.0 || 0.8.0-rc || 0.8.0-rc.2 || 0.9.0-rc || 0.10.1"
+	},
+	"dependencies": {
+		"react-native-print": "0.11.0"
+	},
+	"author": "Christopher Dro <casheghian@gmail.com> (http://chris.si)",
+	"license": "MIT"
 }

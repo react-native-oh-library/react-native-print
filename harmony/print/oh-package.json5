@@ -1,12 +1,12 @@
 {
   "name": "@react-native-oh-tpl/react-native-print",
-  "version": "0.11.0-0.0.2",
+  "version": "0.11.0-0.0.3",
   "description": "Print documents with React Native",
   "main": "index.ets",
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony-5.0.0.491.har"
+    "@rnoh/react-native-openharmony": "file:../libs/react_native_openharmony-5.0.0.700.har"
   }
 }
 
