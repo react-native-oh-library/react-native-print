@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "react-native-print",
+        "License": "MIT License",
+        "License File": "https://github.com/christopherdro/react-native-print/blob/master/LICENSE",
+        "Version Number": "0.11.0",
+        "Owner" : "xiafeng@huawei.com",
+        "Upstream URL": "https://github.com/christopherdro/react-native-print",
+        "Description": "Print documents with React Native"
+    }
+]
